@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id "io.freefair.lombok" version "8.13"
-    id "run.halo.plugin.devtools" version "0.6.1"
+    id "run.halo.plugin.devtools" version "0.8.0"
 }
 
 group 'run.halo.editoremoji'
@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform('run.halo.tools.platform:plugin:2.21.0')
+    implementation platform('run.halo.tools.platform:plugin:2.26.0')
     compileOnly 'run.halo.app:api'
 
     testImplementation 'run.halo.app:api'
@@ -34,7 +34,7 @@ tasks.withType(JavaCompile).configureEach {
     options.release = 21
 }
 
-tasks.register('processUiResources', Copy) {
+tasks.register('processUiResources', Sync) {
     from project(':ui').layout.buildDirectory.dir('dist')
     into layout.buildDirectory.dir('resources/main/console')
     dependsOn project(':ui').tasks.named('assemble')
@@ -46,7 +46,6 @@ tasks.named('classes') {
 }
 
 halo {
-    imageName = "halohub/halo-dev"
-    version = 'main'
+    version = '2.26'
+    port = 8091
 }
-
