@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id "io.freefair.lombok" version "8.13"
+    id "io.freefair.lombok" version "9.2.0"
     id "run.halo.plugin.devtools" version "0.8.0"
 }
 
-group 'run.halo.editoremoji'
+group = 'run.halo.editoremoji'
 
 repositories {
     mavenCentral()
@@ -43,6 +43,10 @@ tasks.register('processUiResources', Sync) {
 
 tasks.named('classes') {
     dependsOn tasks.named('processUiResources')
+}
+
+tasks.named('generatePluginComponentsIdx') {
+    notCompatibleWithConfigurationCache('This task invokes "Task.project" at execution time, which is not supported with configuration cache.')
 }
 
 halo {

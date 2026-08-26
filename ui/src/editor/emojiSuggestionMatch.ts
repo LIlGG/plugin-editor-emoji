@@ -16,9 +16,9 @@ export const findEmojiSuggestionTextMatch = (
     return null
   }
 
-  const text = match[2]
+  const text = match[2]!
   return {
-    query: match[3],
+    query: match[3]!,
     range: {
       from: cursorPosition - text.length,
       to: cursorPosition,

@@ -39,5 +39,5 @@ export const tipTapEmojis: EmojiItem[] = data.e.map(
 export const emojiCategories: EmojiCategory[] = data.c.map(([id, name, emojiIndexes]) => ({
   id,
   name,
-  emojis: emojiIndexes.map((emojiIndex) => tipTapEmojis[emojiIndex]),
+  emojis: emojiIndexes.map((emojiIndex) => tipTapEmojis[emojiIndex]!),
 }))

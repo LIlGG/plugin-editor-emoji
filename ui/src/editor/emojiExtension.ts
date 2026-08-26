@@ -122,7 +122,7 @@ export const Emoji = Node.create<EmojiOptions, EmojiStorage>({
         allow: ({ state, range }) => {
           const $from = state.doc.resolve(range.from)
           const type = state.schema.nodes[this.name]
-          return !!$from.parent.type.contentMatch.matchType(type)
+          return !!type && !!$from.parent.type.contentMatch.matchType(type)
         },
       },
     }
@@ -232,7 +232,7 @@ export const Emoji = Node.create<EmojiOptions, EmojiStorage>({
       new InputRule({
         find: inputRegex,
         handler: ({ range, match, chain }) => {
-          const name = match[1]
+          const name = match[1]!
           if (!shortcodeToEmoji(name, this.options.emojis)) {
             return
           }
@@ -261,7 +261,7 @@ export const Emoji = Node.create<EmojiOptions, EmojiStorage>({
           find: emoticonRegex,
           type: this.type,
           getAttributes: (match) => {
-            const emoji = this.options.emojis.find((item) => item.emoticons?.includes(match[1]))
+            const emoji = this.options.emojis.find((item) => item.emoticons?.includes(match[1]!))
             return emoji ? { name: emoji.name } : undefined
           },
         }),
@@ -277,7 +277,7 @@ export const Emoji = Node.create<EmojiOptions, EmojiStorage>({
         find: pasteRegex,
         handler: ({ range, match, chain }) => {
           const prefix = match[1] || ''
-          const name = match[2]
+          const name = match[2]!
           if (!shortcodeToEmoji(name, this.options.emojis)) {
             return
           }

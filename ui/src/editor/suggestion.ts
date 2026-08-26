@@ -16,7 +16,7 @@ export const createEmojiSuggestion = (): Omit<EmojiSuggestionOptions<EmojiItem>,
     allow: ({ state, range }) => {
       const $from = state.doc.resolve(range.from)
       const type = state.schema.nodes.emoji
-      return !!$from.parent.type.contentMatch.matchType(type)
+      return !!type && !!$from.parent.type.contentMatch.matchType(type)
     },
 
     render: () => {
